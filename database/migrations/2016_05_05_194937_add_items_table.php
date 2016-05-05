@@ -15,22 +15,31 @@ class AddItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('cod');
+
+            //Otros
+            $table->string('name');
+            $table->text('description');
+
+            //Laptops
+            $table->integer('ram');
+            $table->string('model');
+            $table->string('trademark');
+            $table->float('price');
+            $table->integer('capacity');
+
+            //Libros
+            $table->string('title');
+            $table->string('author');
+            $table->integer('p_date');
+            $table->integer('language');
+            $table->string('genre');
+
+
             $table->unsignedInteger('item_type_id')->nullable();
 
             $table->foreign('item_type_id')->references('id')->on('item_types')->onDelete('cascade');
             $table->timestamps();
         });
-        
-       /* Schema::create('user_item', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id')->nullable();
-            $table->unsignedInteger('item_id')->nullable();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
-
-            $table->timestamps();
-        });*/
     }
 
     /**
@@ -40,7 +49,6 @@ class AddItemsTable extends Migration
      */
     public function down()
     {
-        //Schema::drop('user_item');
         Schema::drop('items');
     }
 }
