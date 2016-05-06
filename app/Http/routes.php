@@ -11,6 +11,22 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/',['as'=>'tk.index', function () {
     return view('welcome');
-});
+}]);
+Route::group(['prefix'=>'tk'], function (){
+		Route::resource('users','UsersController');
+
+		//Route::resource('items','ItemsController');
+		Route::get('items/books',['uses'=>'ItemsController@indexBooks',
+		'as'=>'tk.items.books']);
+
+		Route::get('items/laptops',['uses'=>'ItemsController@indexLaptops',
+		'as'=>'tk.items.laptops']);
+
+		Route::get('items/others',['uses'=>'ItemsController@indexOthers',
+		'as'=>'tk.items.others']);
+
+	});
+
+

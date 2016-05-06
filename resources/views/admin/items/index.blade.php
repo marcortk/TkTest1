@@ -1,6 +1,6 @@
 @extends('admin.main')
 
-@section('title','Bienvenidos a la biblioteca virtual')
+@section('title','Lista de items')
 
 
 @section('content')
