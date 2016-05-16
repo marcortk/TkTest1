@@ -30,6 +30,6 @@ class User extends Authenticatable
     }
     public function items(){
 
-        return $this->belongsToMany('App\Item');
+        return $this->belongsToMany('App\Item','user_item');
     }     
 }

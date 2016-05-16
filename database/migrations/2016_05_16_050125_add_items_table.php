@@ -31,7 +31,7 @@ class AddItemsTable extends Migration
             $table->string('title');
             $table->string('author');
             $table->integer('p_date');
-            $table->integer('language');
+            $table->string('language');
             $table->string('genre');
 
 

@@ -4,7 +4,7 @@
 
 
 @section('content')
-	
+	<a href="{{route('tk.items.books.create')}}" class="btn btn-info">Registrar nuevo libro</a>
 	<table class="table table-striped" >
 		
 		<thead >
@@ -14,6 +14,8 @@
 			<th>Genero</th>
 			<th>Idioma</th>
 			<th>Año de Publicación</th>
+			<th>Propietario</th>
+			<th>Asignar</th>
 			
 		</thead>
 		<tbody>
@@ -26,6 +28,8 @@
 						<td>{{$item->genre}}</td>
 						<td>{{$item->language}}</td>
 						<td>{{$item->p_date}}</td>
+						<td><a href="{{route('tk.items.users',$item->id)}}" class="btn btn-warning"></a></td>
+						<td><a href="{{route('tk.items.assign',$item->id)}}" class="btn btn-warning"></a></td>
 
 					</tr>
 				
@@ -35,4 +39,4 @@
 	</table>
 	{!!$items->links()!!}
 
-@endsection
+@endsection 

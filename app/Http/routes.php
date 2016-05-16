@@ -17,15 +17,38 @@ Route::get('/',['as'=>'tk.index', function () {
 Route::group(['prefix'=>'tk'], function (){
 		Route::resource('users','UsersController');
 
-		//Route::resource('items','ItemsController');
+		//Libros
 		Route::get('items/books',['uses'=>'ItemsController@indexBooks',
-		'as'=>'tk.items.books']);
+		'as'=>'tk.items.books.index']);
+		Route::get('items/books/create',['uses'=>'ItemsController@createBooks',
+		'as'=>'tk.items.books.create']);
+		Route::post('items/books',['uses'=>'ItemsController@storeBooks',
+		'as'=>'tk.items.books.store']);
 
+		//Items en general
+		Route::get('items/{id}/assign',['uses'=>'ItemsController@assign',
+			'as'=>'tk.items.assign']);
+		Route::post('items/{id}/assing',['uses'=>'ItemsController@update',
+			'as'=>'tk.items.update']);
+		Route::get('items/{id}/users',['uses'=>'ItemsController@showUsers',
+			'as'=>'tk.items.users']);
+
+		//Laptops
 		Route::get('items/laptops',['uses'=>'ItemsController@indexLaptops',
-		'as'=>'tk.items.laptops']);
+		'as'=>'tk.items.laptops.index']);
+		Route::get('items/laptops/create',['uses'=>'ItemsController@createLaptops',
+		'as'=>'tk.items.laptops.create']);
+		Route::post('items/laptops',['uses'=>'ItemsController@storeLaptops',
+		'as'=>'tk.items.laptops.store']);
 
+
+		//Otros
 		Route::get('items/others',['uses'=>'ItemsController@indexOthers',
-		'as'=>'tk.items.others']);
+		'as'=>'tk.items.others.index']);
+		Route::get('items/others/create',['uses'=>'ItemsController@createOthers',
+		'as'=>'tk.items.others.create']);
+		Route::post('items/others',['uses'=>'ItemsController@storeOthers',
+		'as'=>'tk.items.others.store']);
 
 	});
 

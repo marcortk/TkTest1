@@ -2,13 +2,13 @@
 <html lang="en">
     <head>
     	<meta chasrset="UTF-8">
-        <title>@yield('title','Default')</title>
+        <title >@yield('title','Default')</title>
         <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('plugins/chosen/chosen.css')}}">
 
 
     </head>
-    <body style="background:#8A0808">
+    <body style="background:#070719">
     	@include('admin.template.nav')
     	<section class="section-admin">
             <div class="panel panel-defaults">

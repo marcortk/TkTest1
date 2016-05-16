@@ -19,25 +19,16 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Items <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{route('tk.items.books')}}">Libros</a></li>
-            <li><a href="{{route('tk.items.laptops')}}">Laptops</a></li>
-            <li><a href="{{route('tk.items.others')}}">Otros</a></li>
+            <li><a href="{{route('tk.items.books.index')}}">Libros</a></li>
+            <li><a href="{{route('tk.items.laptops.index')}}">Laptops</a></li>
+            <li><a href="{{route('tk.items.others.index')}}">Otros</a></li>
 
           </ul>
         </li>
 
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
 
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-   
-          </ul>
-        </li>
-      </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
