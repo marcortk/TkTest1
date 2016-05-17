@@ -22,10 +22,10 @@ class ItemsController extends Controller
         $items=Item::orderBy('id','ASC')->paginate(5);
         return view('admin.items.books')->with('items',$items);
     }*/
-    public function indexBooks()
+    public function indexBooks(Request $request)
     {
         //
-        $items=Item::where('item_type_id','=',1)->paginate(5);
+        $items=Item::Search($request->title)->where('item_type_id','=',1)->paginate(5);
         return view('admin.books.index')->with('items',$items);
 
     }

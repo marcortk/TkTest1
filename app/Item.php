@@ -19,5 +19,8 @@ class Item extends Model
     public function users(){
 
         return $this->belongsToMany('App\User','user_item');
-    }    
+    }   
+    public function scopeSearch($query,$title){
+    return $query->where('title','LIKE',"%$title%");
+    }   
 }
