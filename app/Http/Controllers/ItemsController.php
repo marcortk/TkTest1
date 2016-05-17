@@ -7,7 +7,9 @@ use App\Item;
 use App\User;
 use Laracasts\Flash\Flash;
 use App\Http\Requests;
-
+use App\Http\Requests\BookRequest;
+use App\Http\Requests\LaptopReques;
+use App\Http\Requests\OtherRequest;
 class ItemsController extends Controller
 {
     /**
@@ -31,7 +33,7 @@ class ItemsController extends Controller
     	return view('admin.books.create');
 
     }
-    public function storeBooks(Request $request){
+    public function storeBooks(BookRequest $request){
     	$item=new Item($request->all());
     	$items=Item::orderBy('id','DESC');
     	$id=($items->first()->id) +1 ;
@@ -58,7 +60,7 @@ class ItemsController extends Controller
     	return view('admin.laptops.create');
 
     }
-    public function storeLaptops(Request $request){
+    public function storeLaptops(LaptopReques $request){
     	$item=new Item($request->all());
     	$items=Item::orderBy('id','DESC');
     	$id=($items->first()->id) +1 ;
@@ -84,7 +86,7 @@ class ItemsController extends Controller
     	return view('admin.others.create');
 
     }
-    public function storeOthers(Request $request){
+    public function storeOthers(OtherRequest $request){
     	$item=new Item($request->all());
     	$items=Item::orderBy('id','DESC');
     	$id=($items->first()->id) +1 ;
@@ -108,13 +110,12 @@ class ItemsController extends Controller
 
     public function assign($id){
     	$item=Item::find($id);
-    	//$user_id
     	$users=User::orderBy('name','ASC')->lists('name','id');
     	return view('admin.assign')->with('users',$users)->with('item',$item);
     }
     public function update(Request $request,$id){
     	$item=Item::find($id);
-    	$item->users()->sync($request->users);
+    	$item->users()->attach($request->users);
         Flash::message('Se ha asignado el artículo exitosamente');
     	if($item->item_type_id==1) return redirect()->route('tk.items.books.index');
     	else if($item->item_type_id==2) return redirect()->route('tk.items.laptops.index');

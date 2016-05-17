@@ -13,11 +13,11 @@
     	<section class="section-admin">
             <div class="panel panel-defaults">
                 <div class="panel panel-heading">
-                    <h3 class="panel panel-title">@yield('title') </h3>                    
+                    <h1 class="panel panel-title">@yield('title') </h1>                    
                 </div>
                 <div class="panel-body">
                     @include('flash::message')
-                    <!--include('admin.template.errors')-->
+                    @include('admin.template.errors')
                     @yield('content')
                 </div>
             </div>
