@@ -11,8 +11,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table ='users';
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'address','user_type_id'
     ];
 
     /**
@@ -20,7 +21,15 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
+ /*   protected $hidden = [
         'password', 'remember_token',
-    ];
+    ];*/
+    public function user_type(){
+
+        return $this->belongsTo('App\User_type');
+    }
+    public function items(){
+
+        return $this->belongsToMany('App\Item','user_item');
+    }     
 }
