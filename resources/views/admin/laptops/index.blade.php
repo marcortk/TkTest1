@@ -4,7 +4,7 @@
 
 
 @section('content')
-	<a href="{{route('tk.items.laptops.create')}}" class="btn btn-info">Registrar nueva laptop</a>
+	<a href="{{route('tk.items.laptops.create')}}" class="btn btn-info">Registrar nueva laptop<span class="glyphicon glyphicon-apple"></span></a>
 	<table class="table table-striped" >
 		
 		<thead >
@@ -27,8 +27,8 @@
 						<td>{{$item->ram}}</td>
 						<td>{{$item->capacity}}</td>
 						<td>{{$item->price}}</td>
-						<td><a href="{{route('tk.items.users',$item->id)}}" class="btn btn-warning"></a></td>
-						<td><a href="{{route('tk.items.assign',$item->id)}}" class="btn btn-warning"></a></td>
+						<td><a href="{{route('tk.items.users',$item->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-user"></span></a></td>
+						<td><a href="{{route('tk.items.assign',$item->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></a></td>
 					</tr>
 				
 				@endif		

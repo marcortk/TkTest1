@@ -8,19 +8,24 @@
 
 
     </head>
-    <body style="background:#070719">
+   <!-- <style type="text/css">
+   
+    </style>-->
+    <body style="background-image:url('http://wallpoper.com/images/00/31/33/51/black-background_00313351.jpg');">
+  <!--<body background="/home/php-84/Imágenes/back1.jpeg">   -->
     	@include('admin.template.nav')
     	<section class="section-admin">
-            <div class="panel panel-defaults">
-                <div class="panel panel-heading">
-                    <h1 class="panel panel-title">@yield('title') </h1>                    
-                </div>
-                <div class="panel-body">
+              
+                <div class="panel panel-heading" style="background-color: #E6E6E6">
+                    <h1 class="panel panel-title">@yield('title') </h1>
+                </div>                    
+                 <div></div>
+                <div class="panel-body" style="background-color: #E6E6E6">
                     @include('flash::message')
                     @include('admin.template.errors')
                     @yield('content')
                 </div>
-            </div>
+            
     	</section>
 
     	<footer>
