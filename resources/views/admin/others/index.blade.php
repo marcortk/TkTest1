@@ -5,7 +5,7 @@
 
 @section('content')
 	<a href="{{route('tk.items.others.create')}}" class="btn btn-info">Registrar nuevo artículo<span class=" glyphicon glyphicon-phone"></span></a>
-	
+
 	<table class="table table-striped" >
 		
 		<thead >

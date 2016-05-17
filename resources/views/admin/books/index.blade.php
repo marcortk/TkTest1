@@ -6,6 +6,7 @@
 @section('content')
 	<a href="{{route('tk.items.books.create')}}" class="btn btn-info">
 
+
 	Registrar nuevo libro
 	<span class="glyphicon glyphicon-book"></span></a>
 	<!--INICIO BUSCADOR-->
@@ -18,6 +19,7 @@
 	{!!Form::close()!!}
 		<!--FIN BUSCADOR-->
 	<hr>
+
 	<table class="table table-striped" >
 		
 		<thead >
