@@ -4,13 +4,7 @@ use Illuminate\Database\Seeder;
 
 class ItemsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */ 
     public function run()
-
     {
 		DB::table('items')->insert([
 			'cod' => "ART001",
@@ -20,16 +14,15 @@ class ItemsTableSeeder extends Seeder
             'item_type_id' => 1,
             'language' => "Castellano",
             'genre' => "Terror"
-
         ]);
+
 		DB::table('items')->insert([
 			'cod' => "ART002",
             'name' => "asdsadsaf",
             'description' => "afdsaf asf sadf dsf",
             'item_type_id' => 3,
-
-
         ]);
+
 		DB::table('items')->insert([
 			'cod' => "ART003",
             'title' => "It",
@@ -38,8 +31,8 @@ class ItemsTableSeeder extends Seeder
             'item_type_id' => 1,
             'language' => "English",
             'genre' => "Terror"
-
         ]);
+
 		DB::table('items')->insert([
 			'cod' => "ART004",
 			'ram' => 6,
@@ -48,7 +41,6 @@ class ItemsTableSeeder extends Seeder
             'price' => 2000,
             'item_type_id' => 2,            
             'capacity' => 500
-
         ]);
     }
 }

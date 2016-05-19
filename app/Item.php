@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -11,16 +10,17 @@ class Item extends Model
         'name','cod','description','ram',
         'model','trademark','price','capacity','title','author','p_date','language','genre',
         'item_type_id'
-    ];    
-    public function item_type(){
+    ];   
 
-        return $this->belongsTo('App\Item_type');
+    public function itemType(){
+        return $this->belongsTo('App\ItemType');
     }
-    public function users(){
 
+    public function users(){
         return $this->belongsToMany('App\User','user_item');
     }   
+
     public function scopeSearch($query,$title){
-    return $query->where('title','LIKE',"%$title%");
+        return $query->where('title','LIKE',"%$title%");
     }   
 }

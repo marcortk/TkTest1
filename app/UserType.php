@@ -1,16 +1,14 @@
 <?php
-
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User_type extends Model
+class UserType extends Model
 {
-    //
     protected $table ='user_types';
     protected $fillable=['name'];
-    public function users(){
 
+    public function users(){
         return $this->hasMany('App\User');
     } 
 }
