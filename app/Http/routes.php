@@ -3,7 +3,7 @@ Route::get('/', ['as'=>'tk.index', function () {
     return view('welcome');
 }]);
 
-Route::group(['prefix'=>'tk'], function (){
+Route::group(['prefix'=>'tk'], function (){ 
     Route::resource('users', 'UsersController');
     Route::get('items/books', ['uses'=>'ItemsController@indexBooks', 'as'=>'tk.items.books.index']);
     Route::get('items/books/create', ['uses'=>'ItemsController@createBooks', 'as'=>'tk.items.books.create']);

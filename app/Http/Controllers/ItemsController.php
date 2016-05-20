@@ -89,7 +89,7 @@ class ItemsController extends Controller
         
         return redirect()->route('tk.items.others.index');
     }
-
+ 
     public function assign($id){
         $item = Item::find($id);
         $users=User::orderBy('name','ASC')->lists('name','id');
