@@ -7,7 +7,7 @@ class ItemsTableSeeder extends Seeder
     public function run()
     {
 		DB::table('items')->insert([
-			'cod' => "ART001",
+			'cod' => "LIB001",
             'title' => "La ciudad y los perros",
             'author' => "Cesar Acuña",
             'p_date' => 1999,
@@ -17,14 +17,14 @@ class ItemsTableSeeder extends Seeder
         ]);
 
 		DB::table('items')->insert([
-			'cod' => "ART002",
+			'cod' => "OTR001",
             'name' => "asdsadsaf",
             'description' => "afdsaf asf sadf dsf",
             'item_type_id' => 3,
         ]);
 
 		DB::table('items')->insert([
-			'cod' => "ART003",
+			'cod' => "LIB002",
             'title' => "It",
             'author' => "Cesar Acuña",
             'p_date' => 1998,
@@ -34,7 +34,7 @@ class ItemsTableSeeder extends Seeder
         ]);
 
 		DB::table('items')->insert([
-			'cod' => "ART004",
+			'cod' => "LAP001",
 			'ram' => 6,
             'model' => "Satellite 4000",
             'trademark' => "Toshiba",

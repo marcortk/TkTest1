@@ -3,6 +3,7 @@
 @section('title','Lista de usuarios')
 	
 @section('content')
+<a href="{{route('tk.users.create')}}" class="btn btn-info">Registrar nuevo usuario</a>
 	<table class="table table-striped">
 		<thead >			
 			<th>Nombre</th>

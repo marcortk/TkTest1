@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\BookRequest;
 use App\Http\Requests\LaptopRequest;
 use App\Http\Requests\OtherRequest;
+use Auth;
 
 class ItemsController extends Controller
 {
@@ -21,21 +22,27 @@ class ItemsController extends Controller
 
     public function createBooks()
     {
-        return view('admin.books.create');
+        if(Auth::user()->user_type_id==2){
+            return view('admin.books.create');
+        }
+        return view('welcome');
     }
 
     public function storeBooks(BookRequest $request)
     {
-        $item=new Item($request->all());
-        $items=Item::orderBy('id','DESC');
-        $id=($items->first()->id) +1 ;
-        $item->cod= "ART".sprintf('%03d',$id);
-        $item->item_type_id=1;
-        $item->save();
+        if(Auth::user()->user_type_id==2){
+            $item=new Item($request->all());
+            $items=Item::orderBy('id','DESC');
+            $id=($items->first()->id) +1 ;
+            $item->cod= "ART".sprintf('%03d',$id);
+            $item->item_type_id=1;
+            $item->save();
 
-        Flash::message("Se ha registrado el libro ".$item->title);
+            Flash::message("Se ha registrado el libro ".$item->title);
 
-        return redirect()->route('tk.items.books.index');
+            return redirect()->route('tk.items.books.index');
+        }
+        return view('welcome');
     }
 
     public function indexLaptops()
@@ -47,21 +54,27 @@ class ItemsController extends Controller
 
     public function createLaptops()
     {
-        return view('admin.laptops.create');
+        if(Auth::user()->user_type_id==2){
+            return view('admin.laptops.create');
+        }
+        return view('welcome');
     }
 
     public function storeLaptops(LaptopRequest $request)
     {
-        $item=new Item($request->all());
-        $items=Item::orderBy('id','DESC');
-        $id=($items->first()->id) +1 ;
-        $item->cod= "ART".sprintf('%03d',$id);
-        $item->item_type_id=2;
-        $item->save();
+        if(Auth::user()->user_type_id==2){
+            $item=new Item($request->all());
+            $items=Item::orderBy('id','DESC');
+            $id=($items->first()->id) +1 ;
+            $item->cod= "ART".sprintf('%03d',$id);
+            $item->item_type_id=2;
+            $item->save();
 
-        Flash::message("Se ha registrado la laptop ".$item->trademark." ".$item->model);
+            Flash::message("Se ha registrado la laptop ".$item->trademark." ".$item->model);
 
-        return redirect()->route('tk.items.laptops.index');
+            return redirect()->route('tk.items.laptops.index');
+        }
+        return view('welcome');
     }
 
     public function indexOthers()
@@ -73,28 +86,37 @@ class ItemsController extends Controller
 
     public function createOthers()
     {
-        return view('admin.others.create');
+        if(Auth::user()->user_type_id==2){
+            return view('admin.others.create');
+        }
+        return view('welcome');
     }
 
     public function storeOthers(OtherRequest $request)
     {
-        $item = new Item($request->all());
-        $items = Item::orderBy('id','DESC');
-        $id=($items->first()->id) +1 ;
-        $item->cod= "ART".sprintf('%03d',$id);
-        $item->item_type_id=3;
-        $item->save();
-        
-        Flash::message("Se ha registrado el item ".$item->name);
-        
-        return redirect()->route('tk.items.others.index');
+        if(Auth::user()->user_type_id==2){
+            $item = new Item($request->all());
+            $items = Item::orderBy('id','DESC');
+            $id=($items->first()->id) +1 ;
+            $item->cod= "ART".sprintf('%03d',$id);
+            $item->item_type_id=3;
+            $item->save();
+            
+            Flash::message("Se ha registrado el item ".$item->name);
+            
+            return redirect()->route('tk.items.others.index');
+        }
+        return view('welcome');
     }
 
     public function assign($id){
+        if(Auth::user()->user_type_id==2){
         $item = Item::find($id);
         $users=User::orderBy('name','ASC')->lists('name','id');
 
         return view('admin.assign')->with('users',$users)->with('item',$item);
+        }
+        return view('welcome');
     }
 
     public function update(Request $request,$id)

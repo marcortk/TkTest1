@@ -10,6 +10,8 @@ class ItemTypesTableSeeder extends Seeder
 
 		DB::table('item_types')->insert(['name' => "Laptops"]);
 
+		DB::table('item_types')->insert(['name' => "Mouses"]);
+
 		DB::table('item_types')->insert(['name' => "Others"]);
     }
 }
