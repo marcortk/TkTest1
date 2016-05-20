@@ -3,7 +3,7 @@ Route::get('/', ['as'=>'tk.index', function () {
     return view('welcome');
 }]);
 
-Route::group(['prefix'=>'tk'], function (){
+Route::group(['prefix'=>'tk','middleware'=>'auth'], function (){
     Route::resource('users', 'UsersController');
     Route::get('items/books', ['uses'=>'ItemsController@indexBooks', 'as'=>'tk.items.books.index']);
     Route::get('items/books/create', ['uses'=>'ItemsController@createBooks', 'as'=>'tk.items.books.create']);
@@ -23,3 +23,11 @@ Route::group(['prefix'=>'tk'], function (){
 });
 
 
+    Route::get('admin/auth/login',[
+        'uses'=>'Auth\AuthController@getLogin',
+        'as'=>'admin.auth.login']);
+    Route::post('admin/auth/login',[
+        'uses'=>'Auth\AuthController@postLogin','as'=>'admin.auth.login']);
+    Route::get('admin/auth/logout',[
+        'uses'=>'Auth\AuthController@logout',
+        'as'=>'admin.auth.logout']);

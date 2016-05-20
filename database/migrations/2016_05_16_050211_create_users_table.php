@@ -12,7 +12,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('address');
-            $table->string('password',15);
+            $table->string('password',60);
             $table->unsignedInteger('user_type_id')->nullable();
             $table->foreign('user_type_id')->references('id')->on('user_types')->onDelete('cascade');
             $table->rememberToken();
