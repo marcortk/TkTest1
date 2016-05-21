@@ -5,7 +5,7 @@
 @section('content')
     {!! Form::open(['route'=>'tk.items.laptops.store','method'=>'POST']) !!}    
     <div class="form-group">
-        {!! Form::label('trademark','Titulo')!!}
+        {!! Form::label('trademark','Marca')!!}
         {!! Form::text('trademark',null,['class'=>'form-control','placeholder'=>'Marca','required'])!!}
     </div>
     <div class="form-group">
