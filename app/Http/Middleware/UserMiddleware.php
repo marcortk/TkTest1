@@ -17,11 +17,11 @@ class UserMiddleware
      */
     public function handle($request, Closure $next)
     {
-        
         if(Auth::user()->user_type_id==1)
         {
             return redirect()->route('tk.index');
         }
+        
         return $next($request);
     }
 }
