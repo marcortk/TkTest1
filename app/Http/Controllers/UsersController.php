@@ -1,12 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\UserType;
 use Laracasts\Flash\Flash;
 use App\Http\Requests;
-use Auth;
+use App\UserType;
 
 class UsersController extends Controller
 {
@@ -19,38 +19,25 @@ class UsersController extends Controller
 
     public function create()
     {
-        if(Auth::user()->user_type_id==2){
-            $types=UserType::orderBy('name','DESC')->lists('name','id');
-            return view('admin.users.create')->with('types',$types);
-        }
-        return view('welcome');
+        $types=UserType::orderBy('name','DESC')->lists('name','id');
+
+        return view('admin.users.create')->with('types',$types);
     }
 
     public function store(Request $request)
     {
-        if(Auth::user()->user_type_id==2){
-            $user= new User($request->all());
-            $user->password=bcrypt($request->password);
-            $user->save();
-            Flash::message("Se ha registrado".$user->name." de forma exitosa");
-            return redirect()->route('tk.users.index');
-        }
-        return view('welcome');
+        $user = new User;
+        $user->password= bcrypt($request->input('password',1234));
+        $user->name= $request->input('name');
+        $user->address= $request->input('address');
+        $user->email= $request->input('email');
+        $user->user_type_id= $request->input('user_type_id');
+        $user->save();
+
+        Flash::message("Se ha registrado".$user->name." de forma exitosa");
+
+        return redirect()->route('tk.users.index');
     }
 
-    public function show($id)
-    {
-    }
 
-    public function edit($id)
-    {
-    }
-
-    public function update(Request $request, $id)
-    {
-    }
-
-    public function destroy($id)
-    {
-    }
 }
