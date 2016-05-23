@@ -27,8 +27,12 @@ class ItemsController extends Controller
 
     public function storeBooks(BookRequest $request)
     {
-
-        $item=new Item($request->all());
+        $item= new Item;
+        $item->title = $request->input('title');
+        $item->author = $request->input('author');
+        $item->language = $request->input('language');
+        $item->genre = $request->input('genre');
+        $item->p_date = $request->input('p_date');
         $items=Item::orderBy('id','DESC')->where('item_type_id','=',1)->get();
         $id=count($items)+1;
         $item->cod= sprintf('LIB%03d',$id);
@@ -56,7 +60,13 @@ class ItemsController extends Controller
 
     public function storeLaptops(LaptopRequest $request)
     {
-        $item=new Item($request->all());
+        $item=new Item;
+        $item->trademark = $request->input('trademark');
+        $item->model = $request->input('model');
+        $item->capacity = $request->input('capacity');
+        $item->ram = $request->input('ram');
+        $item->price = $request->input('price');
+        $item->
         $items=Item::orderBy('id','DESC')->where('item_type_id','=',2)->get();
         $id=count($items)+1;
         $item->cod= sprintf('LAP%03d',$id);
@@ -82,10 +92,12 @@ class ItemsController extends Controller
 
     public function storeOthers(OtherRequest $request)
     {
-        $item = new Item($request->all());
+        $item = new Item;
+        $item->name = $request->input('name');
+        $item->description = $request->input('description');
         $items=Item::orderBy('id','DESC')->where('item_type_id','=',3)->get();
         $id=count($items)+1;
-        $item->cod= sprintf('%03d',$id);
+        $item->cod= sprintf('OTR%03d',$id);
         $item->item_type_id=3;
         $item->save();
             

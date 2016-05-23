@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Laracasts\Flash\Flash;
 use App\Http\Requests;
+use App\UserType;
 
 class UsersController extends Controller
 {
@@ -17,17 +19,19 @@ class UsersController extends Controller
 
     public function create()
     {
-        if(Auth::user()->user_type_id==2){
-            dd('hola');
-        }
         $types=UserType::orderBy('name','DESC')->lists('name','id');
+
         return view('admin.users.create')->with('types',$types);
     }
 
     public function store(Request $request)
     {
-        $user= new User($request->all());
-        $user->password=$request->password;
+        $user = new User;
+        $user->password= $request->input('password',1234);
+        $user->name= $request->input('name');
+        $user->address= $request->input('address');
+        $user->email= $request->input('email');
+        $user->user_type_id= $request->input('user_type_id');
         $user->save();
 
         Flash::message("Se ha registrado".$user->name." de forma exitosa");
