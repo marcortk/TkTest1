@@ -15,6 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       @if(Auth::user())
+      @if(Auth::user()->user_type_id==2)
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{route('tk.users.index')}}">Usuarios <span class="sr-only">(current)</span></a></li>
 
@@ -24,13 +25,24 @@
             <li><a href="{{route('tk.items.books.index')}}">Libros</a></li>
             <li><a href="{{route('tk.items.laptops.index')}}">Laptops</a></li>
             <li><a href="{{route('tk.items.others.index')}}">Otros</a></li>
-
           </ul>
         </li>
 
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-
+       @else
+       <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mis Cosas <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{route('worker.items.book')}}">Libro</a></li>
+            <li><a href="{{route('worker.items.laptop')}}">Laptop</a></li>
+            <li><a href="{{route('worker.items.other')}}">Otros</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Reportar avería <span class="sr-only">(current)</span></a></li>
+       </ul>
+       @endif
+        <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}}<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -40,7 +52,7 @@
           </ul>
         </li>
       </ul>
-      @endif 
+      @endif
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

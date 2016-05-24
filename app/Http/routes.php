@@ -1,9 +1,9 @@
 <?php
-Route::get('/', ['as'=>'tk.index', function () {
+Route::get('/', ['as'=>'tk.index','middleware'=>'auth', function () {
     return view('welcome');
 }]);
 
-Route::group(['prefix'=>'tk','middleware'=>['auth','user']], function (){
+Route::group(['prefix'=>'tk','middleware'=>['auth','admin']], function (){
     Route::get('users', ['uses'=>'UsersController@index', 'as'=>'tk.users.index']);
     Route::get('users/create', ['uses'=>'UsersController@create', 'as'=>'tk.users.create']);
     Route::post('items/users', ['uses'=>'UsersController@store', 'as'=>'tk.users.store']);
@@ -25,6 +25,12 @@ Route::group(['prefix'=>'tk','middleware'=>['auth','user']], function (){
     Route::post('items/others', ['uses'=>'ItemsController@storeOthers', 'as'=>'tk.items.others.store']);
 });
 
+    Route::group(['prefix'=>'worker','middleware'=>['auth','worker']], function(){
+        Route::get('items/book',['uses'=>'WorkerController@book','as'=>'worker.items.book']);
+        Route::get('items/laptop',['uses'=>'WorkerController@laptop','as'=>'worker.items.laptop']);
+        Route::get('items/other',['uses'=>'WorkerController@other','as'=>'worker.items.other']);
+        Route::get('damaged/{id}',['uses'=>'WorkerController@damaged','as'=>'worker.damaged']);
+    });
 
     Route::get('admin/auth/login',[
         'uses'=>'Auth\AuthController@getLogin',
