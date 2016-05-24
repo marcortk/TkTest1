@@ -29,24 +29,4 @@
         </tbody>
     </table>
     @endif
-    @if($mouse ==NULL)
-        No se le asignó ningun mouse
-    @else
-    <table class="table table-striped">
-        <thead >
-            <th>Código</th>
-            <th>Marca</th>
-            <th>Precio</th>
-            <th>Reportar Avería</th>
-        </thead>
-        <tbody>
-         <tr>
-             <td>{{$mouse->cod}}</td>
-             <td>{{$mouse->trademark}}</td>
-             <td>{{$mouse->price}}</td>
-             <td><a href="{{route('worker.damaged',$mouse->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-user"></span></a></td>
-         </tr> 
-        </tbody>
-    </table>
-    @endif
 @endsection

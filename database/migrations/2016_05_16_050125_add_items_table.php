@@ -15,7 +15,6 @@ class AddItemsTable extends Migration
             $table->integer('ram');
             $table->string('model');
             $table->string('trademark');
-            $table->string('mouse_trademark');
             $table->float('price');
             $table->integer('capacity');
             $table->string('title');
@@ -23,7 +22,6 @@ class AddItemsTable extends Migration
             $table->integer('p_date');
             $table->string('language');
             $table->string('genre');
-            $table->string('laptop_cod');
             $table->unsignedInteger('item_type_id')->nullable();
             $table->foreign('item_type_id')->references('id')->on('item_types')->onDelete('cascade');
             $table->timestamps();

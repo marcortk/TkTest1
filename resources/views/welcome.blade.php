@@ -1,6 +1,6 @@
 @extends('admin.main')
 
-@section('title','Bienvenidos a la biblioteca virtual')
+@section('title','Bienvenido '.Auth::user()->name.' a la biblioteca virtual')
 
 
 @section('content')

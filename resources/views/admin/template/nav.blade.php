@@ -24,6 +24,7 @@
           <ul class="dropdown-menu">
             <li><a href="{{route('tk.items.books.index')}}">Libros</a></li>
             <li><a href="{{route('tk.items.laptops.index')}}">Laptops</a></li>
+            <li><a href="{{route('tk.items.mouses.index')}}">Mouses</a></li>
             <li><a href="{{route('tk.items.others.index')}}">Otros</a></li>
           </ul>
         </li>
@@ -36,10 +37,11 @@
           <ul class="dropdown-menu">
             <li><a href="{{route('worker.items.book')}}">Libro</a></li>
             <li><a href="{{route('worker.items.laptop')}}">Laptop</a></li>
+            <li><a href="{{route('worker.items.mouse')}}">Mouse</a></li>
             <li><a href="{{route('worker.items.other')}}">Otros</a></li>
           </ul>
         </li>
-        <li><a href="#">Reportar avería <span class="sr-only">(current)</span></a></li>
+        <li><a href="{{route('worker.myReport')}}">Mis Reportes <span class="sr-only">(current)</span></a></li>
        </ul>
        @endif
         <ul class="nav navbar-nav navbar-right">

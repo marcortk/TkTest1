@@ -42,7 +42,33 @@ class ItemsController extends Controller
         Flash::message("Se ha registrado el libro ".$item->title);
 
         return redirect()->route('tk.items.books.index');
-;
+    }
+
+    public function indexMouses(Request $request)
+    {
+        $items=Item::where('item_type_id','=',3)->paginate(5);
+
+        return view('admin.mouses.index')->with('items',$items);
+    }
+
+    public function createMouses()
+    {
+        return view('admin.mouses.create');
+    }
+
+    public function storeMouses(Request $request)
+    {
+        $item= new Item;
+        $item->trademark = $request->input('trademark');
+        $items=Item::orderBy('id','DESC')->where('item_type_id','=',3)->get();
+        $id=count($items)+1;
+        $item->cod= sprintf('MOU%03d',$id);
+        $item->item_type_id=3;
+        $item->save();
+
+        Flash::message("Se ha registrado el mouse correctamente ");
+
+        return redirect()->route('tk.items.mouses.index');
     }
 
     public function indexLaptops()
@@ -70,14 +96,7 @@ class ItemsController extends Controller
         $id=count($laptops)+1;
         $laptop->cod= sprintf('LAP%03d',$id);
         $laptop->item_type_id=2;
-        $mouse = new Item;
-        $mouse->mouse_trademark = $request->input('mouse_trademark');
-        $mouses=Item::orderBy('id','DESC')->where('item_type_id','=',3)->get();
-        $id2=count($mouses)+1;
-        $mouse->cod= sprintf('MOU%03d',$id);
-        $laptop->laptop_cod = $mouse->cod;
         $laptop->save();
-        $mouse->save();
 
         Flash::message("Se ha registrado la laptop ".$laptop->trademark." ".$laptop->model);
 
@@ -131,10 +150,6 @@ class ItemsController extends Controller
             Flash::message('Este usuario ya tiene un artículo del mismo tipo');
         }
         else{
-            if($itemType==2){
-                $mouse=Item::where('cod','=',$item->laptop_cod)->get();
-                $mouse->users()->attach($request->users);
-            }
             $item->users()->attach($request->users);
 
             Flash::message('Se ha asignado el artículo exitosamente');
@@ -142,6 +157,7 @@ class ItemsController extends Controller
 
         if($itemType==1) return redirect()->route('tk.items.books.index');
         else if($itemType==2) return redirect()->route('tk.items.laptops.index');
+        else if($itemType==3) return redirect()->route('tk.items.mouses.index');
         else if($itemType==4) return redirect()->route('tk.items.others.index');
     }
 
