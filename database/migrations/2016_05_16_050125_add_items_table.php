@@ -22,6 +22,7 @@ class AddItemsTable extends Migration
             $table->integer('p_date');
             $table->string('language');
             $table->string('genre');
+            $table->boolean('damaged')->default(false);
             $table->unsignedInteger('item_type_id')->nullable();
             $table->foreign('item_type_id')->references('id')->on('item_types')->onDelete('cascade');
             $table->timestamps();

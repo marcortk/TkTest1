@@ -19,6 +19,7 @@ Route::group(['prefix'=>'tk'], function (){
     Route::get('items/{id}/assign', ['uses'=>'ItemsController@assign', 'as'=>'tk.items.assign']);
     Route::post('items/{id}/assing', ['uses'=>'ItemsController@update', 'as'=>'tk.items.update']);
     Route::get('items/{id}/users', ['uses'=>'ItemsController@showUsers', 'as'=>'tk.items.users']);
+    Route::get('items/{id}/state', ['uses'=>'ItemsController@changeState', 'as'=>'tk.items.state']);
 
     Route::get('items/laptops', ['uses'=>'ItemsController@indexLaptops',    'as'=>'tk.items.laptops.index']);
     Route::get('items/laptops/create', ['uses'=>'ItemsController@createLaptops', 'as'=>'tk.items.laptops.create']);

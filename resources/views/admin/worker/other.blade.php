@@ -3,7 +3,7 @@
 @section('title','Otros')
 
 @section('content')
-    @if($item ==NULL)
+    @if($item ==NULL|| $item->damaged==true)
         No se le asignó ningun item
     @else
     <table class="table table-striped" >

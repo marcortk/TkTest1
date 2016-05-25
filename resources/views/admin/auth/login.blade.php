@@ -1,5 +1,4 @@
 @extends('admin.main')
-@section('title','Login')
 @section('content')
     {!!Form::open(['route'=>'admin.auth.login','method'=>'POST'])!!}
     <div class="form-group">
