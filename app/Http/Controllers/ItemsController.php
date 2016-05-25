@@ -194,14 +194,14 @@ class ItemsController extends Controller
     public function showUsers($id)
     {
         $item = Item::find($id);
-        $users = ($item->users())->orderBy('id','DESC');
+        $users = ($item->users())->orderBy('id','DESC')->get();
         $user = $users->first();
-        $item2 = (($user->items())->orderBy('id','DESC'))->first();
-        if($item2->cod==$item->cod)
+        $items2 = (($user->items())->orderBy('id','DESC'))->get();
+        $item2 = $items2->first();
+        if($item2->cod == $item->cod)
             $flag = true;
         else
             $flag = false;
-
         return view('admin.users')->with('user',$user)->with('users',$users)->with('item',$item)->with('flag',$flag);
     }
 }

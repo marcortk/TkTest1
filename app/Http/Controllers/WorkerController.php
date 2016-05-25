@@ -15,7 +15,10 @@ class WorkerController extends Controller
         $items = (Auth::user()->items())->orderBy('id','DESC');
         $items = $items->where('item_type_id','=',1)->get();
         $item = $items->first();
-        return view('admin.worker.book')->with('item',$item);
+        $users = $item->users()->orderBy('id','DESC')->get();
+        $user = $users->first();
+        $flag= (Auth::user()->name == $user->name);
+        return view('admin.worker.book')->with('item',$item)->with('flag',$flag);
     }
 
     public function laptop(){
