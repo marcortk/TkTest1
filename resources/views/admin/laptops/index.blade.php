@@ -12,6 +12,8 @@
             <th>Ram(GB)</th>
             <th>Capacidad</th>
             <th>Precio</th>
+            <th>Estado</th>
+            <th>Cambiar Estado</th>
             <th>Propietario</th>
             <th>Asignar</th>
         </thead>
@@ -24,6 +26,14 @@
                         <td>{{$item->ram}}</td>
                         <td>{{$item->capacity}}</td>
                         <td>{{$item->price}}</td>
+                        <td>
+                            @if($item->damaged==true)
+                            <span class="label label-danger">Dañado</span>
+                        @else
+                            <span class="label label-primary">Funcional</span>  
+                        @endif
+                        </td>
+                        <td><a href="{{route('tk.items.state',$item->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-user"></span></a></td>
                         <td><a href="{{route('tk.items.users',$item->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-user"></span></a></td>
                         <td><a href="{{route('tk.items.assign',$item->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></a></td>
                     </tr>   

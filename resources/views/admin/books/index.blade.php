@@ -24,6 +24,8 @@
             <th>Genero</th>
             <th>Idioma</th>
             <th>Año de Publicación</th>
+            <th>Estado</th>
+            <th>Cambiar Estado</th>
             <th>Propietario</th>
             <th>Asignar</th>
         </thead>
@@ -36,6 +38,14 @@
                         <td>{{$item->genre}}</td>
                         <td>{{$item->language}}</td>
                         <td>{{$item->p_date}}</td>
+                        <td>
+                            @if($item->damaged==true)
+                            <span class="label label-danger">Dañado</span>
+                        @else
+                            <span class="label label-primary">Funcional</span>  
+                        @endif
+                        </td>
+                        <td><a href="{{route('tk.items.state',$item->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-user"></span></a></td>
                         <td><a href="{{route('tk.items.users',$item->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-user"></span></a></td>
                         <td><a href="{{route('tk.items.assign',$item->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></a></td>
                     </tr>

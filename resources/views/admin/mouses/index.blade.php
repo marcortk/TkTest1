@@ -1,25 +1,23 @@
 @extends('admin.main')
 
-@section('title','Lista de items ')
+@section('title','Lista de mouses')
 
 @section('content')
-    <a href="{{route('tk.items.others.create')}}" class="btn btn-info">Registrar nuevo artículo<span class=" glyphicon glyphicon-phone"></span></a>
+    <a href="{{route('tk.items.mouses.create')}}" class="btn btn-info">Registrar nuevo mouse<span class="glyphicon glyphicon-apple"></span></a>
     <table class="table table-striped" >    
         <thead >
             <th>Código</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
+            <th>Marca</th>
             <th>Estado</th>
             <th>Cambiar Estado</th>
             <th>Propietario</th>
             <th>Asignar</th>
         </thead>
         <tbody>
-            @foreach($items as $item)
+            @foreach($items as $item)   
                     <tr>
                         <td>{{$item->cod}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->description}}</td>
+                        <td>{{$item->trademark}}</td>
                         <td>
                             @if($item->damaged==true)
                             <span class="label label-danger">Dañado</span>
@@ -30,7 +28,7 @@
                         <td><a href="{{route('tk.items.state',$item->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-user"></span></a></td>
                         <td><a href="{{route('tk.items.users',$item->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-user"></span></a></td>
                         <td><a href="{{route('tk.items.assign',$item->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></a></td>
-                    </tr>       
+                    </tr>   
             @endforeach
         </tbody>
     </table>

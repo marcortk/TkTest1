@@ -20,6 +20,10 @@ class Item extends Model
         return $this->belongsToMany('App\User','user_item');
     }   
 
+    public function reports(){
+        return $this->belongsToMany('App\User','reports')->withPivot('user_id','item_id','description');
+    }
+
     public function scopeSearch($query,$title){
         return $query->where('title','LIKE',"%$title%");
     }   
