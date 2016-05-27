@@ -17,7 +17,7 @@ class Item extends Model
     }
 
     public function users(){
-        return $this->belongsToMany('App\User','user_item');
+        return $this->belongsToMany('App\User','user_item')->withPivot('user_id','item_id','id','in_use');
     }   
 
     public function reports(){

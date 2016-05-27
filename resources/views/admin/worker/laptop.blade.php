@@ -3,7 +3,7 @@
 @section('title','Laptop')
 
 @section('content')
-    @if($laptop ==NULL|| $item->damaged==true)
+    @if($laptop ==NULL|| $laptop->damaged==true)
         No se le asignó ninguna laptop
     @else
     <table class="table table-striped">
