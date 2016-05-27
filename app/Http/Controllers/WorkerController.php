@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -12,36 +11,59 @@ use App\Http\Requests;
 class WorkerController extends Controller
 {
     public function book(){
-        $items = (Auth::user()->items())->orderBy('id','DESC');
-        $items = $items->where('item_type_id','=',1)->get();
-        $item = $items->first();
-        $users = $item->users()->orderBy('id','DESC')->get();
-        $user = $users->first();
-        $flag= (Auth::user()->name == $user->name);
-        return view('admin.worker.book')->with('item',$item)->with('flag',$flag);
+        $itemUser = (Auth::user()->items())->where('item_type_id','=',1)->get();
+        $item = NULL;
+        if($itemUser != NULL){
+            foreach ($itemUser as $it) {
+                if($it->pivot->in_use){
+                    $item = $it;
+                    break;
+                }
+            }
+        }
+        return view('admin.worker.book')->with('item',$item);
     }
 
     public function laptop(){
-        $laptops = (Auth::user()->items())->orderBy('id','DESC');
-        $laptops = $items->where('item_type_id','=',2)->get();
-        $laptop = $laptops->first();
-
+        $itemUser = (Auth::user()->items())->where('item_type_id','=',2)->get();
+        $laptop = NULL;
+        if($itemUser != NULL){
+            foreach ($itemUser as $it) {
+                if($it->pivot->in_use){
+                    $laptop = $it;
+                    break;
+                }
+            }
+        }
         return view('admin.worker.laptop')->with('laptop',$laptop);
     }
 
     public function mouse(){
-        $items = (Auth::user()->items())->orderBy('id','DESC');
-        $items = $items->where('item_type_id','=',3)->get();
-        $item = $items->first();
-
+        $itemUser = (Auth::user()->items())->where('item_type_id','=',3)->get();
+        $item = NULL;
+        if($itemUser != NULL){
+            foreach ($itemUser as $it) {
+                if($it->pivot->in_use){
+                    $item = $it;
+                    break;
+                }
+            }
+        }
         return view('admin.worker.mouse')->with('item',$item);
+    
     }
 
     public function other(){
-        $items = (Auth::user()->items())->orderBy('id','DESC');
-        $items = $items->where('item_type_id','=',4)->get();
-        $item = $items->first();
-
+        $itemUser = (Auth::user()->items())->where('item_type_id','=',4)->get();
+        $item = NULL;
+        if($itemUser != NULL){
+            foreach ($itemUser as $it) {
+                if($it->pivot->in_use){
+                    $item = $it;
+                    break;
+                }
+            }
+        }
         return view('admin.worker.other')->with('item',$item);
     }
 
@@ -52,10 +74,16 @@ class WorkerController extends Controller
     
     public function report(Request $request,$id){
 
-        $item=Item::find($id);
-        $des=(string)($request->des);
+        $item = Item::find($id);
+        $users = $item->users()->get();
+        foreach($users as $us){
+            if ($us->pivot->in_use){
+                $item->users()->sync([($us->id) =>['in_use'=>false]],false);
+            }
+        }
+        $des = (string)($request->des);
         $item->reports()->attach(Auth::user(),['description'=>$des]);
-        $item->damaged=true;
+        $item->damaged = true;
         $item->save();
         return redirect()->route('worker.myReport');
     }

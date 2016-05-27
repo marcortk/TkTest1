@@ -9,6 +9,7 @@ class AddUserItemTable extends Migration
         Schema::create('user_item', function (Blueprint $table)
         {
             $table->increments('id');
+            $table->boolean('in_use')->default(true);
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('item_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

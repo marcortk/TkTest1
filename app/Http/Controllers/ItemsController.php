@@ -150,27 +150,36 @@ class ItemsController extends Controller
 
     public function update(Request $request,$id)
     {
+
         $item = Item::find($id);
         $user = User::find($request->users);
         $itemType = $item->item_type_id;
-        $userItems = ($user->items())->where('item_type_id','=',$itemType)->get();
-
-        if(count($userItems)>0){
-            if($userItems->first()->damaged==true){
+        $itemsUser = ($user->items())->where('item_type_id','=',$itemType)->get();
+        $flag = false;
+        if($itemsUser != NULL){
+            foreach($itemsUser as $item1){
+                if ($item1->pivot->in_use){
+                    $flag = true;
+                    break;
+                }
+            }
+        }
+            if($flag){
+                Flash::message('El usuario ya tiene un item del mismo tipo.');
+            }
+            else{
+                $users = $item->users()->get();
+                if($users!=NULL){
+                    foreach($users as $us){
+                        if ($us->pivot->in_use){
+                            $item->users()->sync([($us->id) =>['in_use'=>false]],false);
+                        }
+                    }
                 $item->users()->attach($request->users);
 
                 Flash::message('Se ha asignado el artículo exitosamente');
             }
-            else{
-                Flash::message('Este usuario ya tiene un artículo del mismo tipo');
-            }
         }
-        else{
-            $item->users()->attach($request->users);
-
-            Flash::message('Se ha asignado el artículo exitosamente');
-        }
-
         if($itemType == 1) return redirect()->route('tk.items.books.index');
         else if($itemType == 2) return redirect()->route('tk.items.laptops.index');
         else if($itemType == 3) return redirect()->route('tk.items.mouses.index');
@@ -179,10 +188,22 @@ class ItemsController extends Controller
 
     public function changeState($id){
         $item = Item::find($id);
-        $item->damaged=(!$item->damaged);
-        $item->save();
+        if($item->damaged){
+            /*$users = $item->users()->get();
+            if($users!=NULL){
+                foreach ($users as $us) {
+                    if ($us->pivot->in_use){
+                        $item->users()->sync([($us->id) =>['in_use'=>false]],false);
+                    }
+                }
+            }*/
+            $item->damaged=(!$item->damaged);
+            $item->save();
 
-        Flash::message('Se ha cambiado el estado del item.');
+            Flash::message('Se ha cambiado el estado del item.');
+        }
+        else
+            Flash::message('El item ya se encuentra funcional.');
 
         if($item->item_type_id == 1) return redirect()->route('tk.items.books.index');
         else if($item->item_type_id == 2) return redirect()->route('tk.items.laptops.index');
@@ -194,14 +215,16 @@ class ItemsController extends Controller
     public function showUsers($id)
     {
         $item = Item::find($id);
-        $users = ($item->users())->orderBy('id','DESC')->get();
-        $user = $users->first();
-        $items2 = (($user->items())->orderBy('id','DESC'))->get();
-        $item2 = $items2->first();
-        if($item2->cod == $item->cod)
-            $flag = true;
-        else
-            $flag = false;
-        return view('admin.users')->with('user',$user)->with('users',$users)->with('item',$item)->with('flag',$flag);
+        $users = ($item->users())->get();
+        $user = NULL;
+        if($users!=NULL){
+            foreach($users as $us){
+                if($us->pivot->in_use){
+                    $user = $us;
+                    break;
+                }
+            }
+        }
+        return view('admin.users')->with('user',$user)->with('users',$users)->with('item',$item);
     }
 }

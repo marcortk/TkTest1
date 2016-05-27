@@ -1,6 +1,6 @@
 @extends('admin.main')
 
-@section('title','Laptop')
+@section('title','Mouse')
 
 @section('content')
     @if($item ==NULL|| $item->damaged==true)
